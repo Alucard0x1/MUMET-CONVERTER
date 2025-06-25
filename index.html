@@ -7,16 +7,17 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  padding: 30px;
+  padding: 40px 20px;
   background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
+  margin: 0;
 }
 .container {
   background: #fff;
-  padding: 25px;
+  padding: 30px 25px;
   border-radius: 12px;
   max-width: 500px;
   width: 100%;
@@ -26,23 +27,25 @@ h2 {
   font-size: 24px;
   text-align: center;
   color: #333;
+  margin-bottom: 20px;
 }
 textarea {
   width: 100%; 
   font-size: 16px;
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  resize: none;
+  resize: vertical;
   margin-bottom: 15px;
   outline: none;
+  white-space: pre-wrap;
 }
 textarea:focus {
   border-color: #667eea;
 }
 button {
   font-size: 16px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
@@ -50,6 +53,8 @@ button {
   color: #fff;
   font-weight: bold;
   transition: background 0.3s ease;
+  display: block;
+  width: 100%;
 }
 button:hover {
   background: #546de5;
@@ -66,49 +71,35 @@ button:hover {
   <textarea id="output" placeholder="Hasil angka..." readonly></textarea>
   <button id="copyButton">Copy Output</button>
 </div>
-
 <script>
 const mapping = {
   A: '4', B: '8', C: '6', D: '0', E: '3',
   F: '7', G: '9', H: '4', I: '1', J: '7',
   K: '9', L: '1', M: '3', N: '2', O: '0',
   P: '9', Q: '9', R: '12', S: '5', T: '7',
-  U: '0', V: '7', W: '88', X: '24', Y: '4',
-  Z: '2',
+  U: '0', V: '7', W: '88', X: '24', Y: '4', Z: '2',
 };
-
 function convertToNumber(text) {
   return text
-    .split(' ')
-    .map(word =>
-      word
-        .split('')
-        .map(ch => {
-          const upper = ch.toUpperCase();
-          return mapping[upper] ?? ch;
-        })
-        .join('')
-    )
-    .join(' ');
+    .split("\n")
+    .map(line => line.split(" ").map(word => word.split("").map(ch => mapping[ch.toUpperCase()] ?? ch).join("")).join(" "))
+    .join("\n");
 }
-
-const inputEl = document.getElementById('input');
-const outputEl = document.getElementById('output');
-const copyButton = document.getElementById('copyButton');
-
-inputEl.addEventListener('input', () => {
+const inputEl = document.getElementById("input");
+const outputEl = document.getElementById("output");
+const copyButton = document.getElementById("copyButton");
+inputEl.addEventListener("input", () => {
   outputEl.value = convertToNumber(inputEl.value);
 });
-
-copyButton.addEventListener('click', () => {
+copyButton.addEventListener("click", () => {
   outputEl.focus();
   outputEl.select();
-  document.execCommand('copy');
-  outputEl.classList.add('output-highlight');
+  document.execCommand("copy");
+  outputEl.classList.add("output-highlight");
   setTimeout(() => {
-    outputEl.classList.remove('output-highlight');
+    outputEl.classList.remove("output-highlight");
   }, 1000);
-  alert('Output berhasil dicopy!');
+  alert("Output berhasil dicopy!");
 });
 </script>
 </body>
