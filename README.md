@@ -22,7 +22,7 @@ KOPI ENAK.
 Output:
 
 ```
-9091 324.
+9091 3249.
 ```
 
 Saat mengetik:
@@ -34,7 +34,7 @@ HELLO WORLD.
 Output:
 
 ```
-43110 882312.
+43110 8801210.
 ```
 
 ## 🗂️ Pola Angka
