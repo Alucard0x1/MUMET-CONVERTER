@@ -1,34 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MUMET CONVERTER</title>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- Latest Bootstrap 5.3 -->
+<title>MUMET CONVERTER</title>
+<!-- Import Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient" style="background: linear-gradient(135deg, #667eea, #764ba2);">
-<div class="d-flex justify-content-center align-items-start min-vh-100 p-4">
-  <div class="card shadow rounded-3 p-4" style="max-width: 500px; width: 100%;">
-    <h2 class="text-center text-dark">💻 MUMET CONVERTER</h2>
-    <textarea id="input" class="form-control my-3" placeholder="Ketik kalimatmu di sini..." rows="5"></textarea>
-    <textarea id="output" class="form-control my-3" placeholder="Hasil angka..." rows="5" readonly></textarea>
+<body class="bg-gradient p-3" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+<div class="container mt-5">
+  <div class="card p-4 rounded shadow-sm">
+    <h2 class="text-center">💻 MUMET CONVERTER</h2>
+    <textarea id="input" class="form-control my-3" placeholder="Ketik kalimatmu di sini..."></textarea>
+    <textarea id="output" class="form-control my-3" placeholder="Hasil angka..." readonly></textarea>
     <button id="copyButton" class="btn btn-primary w-100">Copy Output</button>
   </div>
 </div>
 <script>
-const mapping = {
-  A: '4', B: '8', C: '6', D: '0', E: '3',
-  F: '7', G: '9', H: '4', I: '1', J: '7',
-  K: '9', L: '1', M: '3', N: '2', O: '0',
-  P: '9', Q: '9', R: '12', S: '5', T: '7',
-  U: '0', V: '7', W: '88', X: '24', Y: '4', Z: '2'
-};
+const mapping = { A:'4',B:'8',C:'6',D:'0',E:'3',F:'7',G:'9',H:'4',I:'1',J:'7',K:'9',L:'1',M:'3',N:'2',O:'0',P:'9',Q:'9',R:'12',S:'5',T:'7',U:'0',V:'7',W:'88',X:'24',Y:'4',Z:'2' };
 function convertToNumber(text) {
-  return text
-    .split("\n")
-    .map(line => line.split(" ").map(word => word.split(" ").map(ch => mapping[ch.toUpperCase()] ?? ch).join("")))
-    .join("\n");
+  return text.split("\n").map(line => line.split(" ").map(word => word.split("").map(ch => mapping[ch.toUpperCase()] ?? ch).join("")).join(" ")).join("\n");
 }
 const inputEl = document.getElementById("input");
 const outputEl = document.getElementById("output");
@@ -37,9 +28,10 @@ inputEl.addEventListener("input", () => {
   outputEl.value = convertToNumber(inputEl.value);
 });
 copyButton.addEventListener("click", () => {
-  outputEl.focus();
-  outputEl.select();
+  outputEl.focus(); outputEl.select();
   document.execCommand("copy");
+  outputEl.classList.add("bg-success","text-white");
+  setTimeout(() => outputEl.classList.remove("bg-success","text-white"), 1000);
   alert("Output berhasil dicopy!");
 });
 </script>
