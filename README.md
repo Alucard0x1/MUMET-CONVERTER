@@ -76,7 +76,7 @@ Kamu dapat langsung mencoba dengan menyimpan kode HTML dari proyek ini dan membu
 
 1. **Clone** repository ini:
    ```bash
-   git clone [https://github.com/username/mumet-converter.git](https://github.com/Alucard0x1/MUMET-CONVERTER.git)
+   git clone https://github.com/Alucard0x1/MUMET-CONVERTER.git
    ```
 2. Buka file `index.html` dengan browser kamu.
 
